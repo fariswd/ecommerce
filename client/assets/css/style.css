@@ -30,16 +30,28 @@ body {
   background-color: black;
 }
 
-.header_cart{
+.right_align {
+  text-align: right;
+}
+
+.header_cart, .header_trans {
   border-bottom: 1px solid lightgray;
 }
 
-.data_cart{
+.data_cart, .data_trans{
   padding: 0 2px 0 2px;
 }
 
-.footer_cart{
+.footer_cart, .footer_trans{
   border-top: 1px solid lightgray;
+}
+
+.grand_total {
+  text-align: right;
+}
+
+.grand_total_value {
+  font-weight: bold;
 }
 
 .featured {
