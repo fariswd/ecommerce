@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Rocksell. Sell Space Gears</title>
+
+    <!-- vue -->
+    <script src="https://unpkg.com/vue"></script>
+
+    <!-- axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.min.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="app">
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Rocksell</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Catagory <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">One Way Ticket</a></li>
+                  <li><a href="#">Rocket</a></li>
+                  <li><a href="#">Sattelites</a></li>
+                  <li><a href="#">Space Suit</a></li>
+                </ul>
+              </li>
+            </ul>
+            <form class="navbar-form navbar-left">
+              <div class="form-group">
+                <input type="text" placeholder="Search Box" class="search_box">
+                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+              </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+                <li><a data-toggle="modal" data-target="#cart" href="">My Cart <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> [<span>{{cart.length}}</span>]</a></li>
+                <li><a href="login.html">Signin</a></li>
+                <li><a href="#">Signup</a></li>
+            </ul>
+          </div><!--/.navbar-collapse -->
+        </div>
+      </nav>
+
+      <!-- Modal -->
+      <div id="cart" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">My Cart</h4>
+            </div>
+            <div class="modal-body">
+              <div class="row header_cart">
+                <div class="col-md-3">
+                  Item Name
+                </div>
+                <div class="col-md-1">
+                  Qty
+                </div>
+                <div class="col-md-2">
+                  Price
+                </div>
+                <div class="col-md-3">
+                  Total Price
+                </div>
+                <div class="col-md-1">
+                  Action
+                </div>
+              </div>
+              <div class="data_cart" v-for="c in cart">
+                <div class="row">
+                  <div class="col-md-3">
+                    {{ c.name }}
+                  </div>
+                  <div class="col-md-1">
+                    {{ c.qty }}
+                  </div>
+                  <div class="col-md-2">
+                    {{ c.priceidr }}
+                  </div>
+                  <div class="col-md-3">
+                    {{ c.totalitem }}
+                  </div>
+                  <div class="col-md-1">
+                    <a v-on:click="delId(c)" class="badge badge-warning">Remove Item</a>
+                  </div>
+                </div>
+              </div>
+              <div class="row footer_cart">
+                <div class="col-md-6">
+                  Total Price
+                </div>
+                <div class="col-md-6">
+                  {{ total }}
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default">Checkout</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="container top_head">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+          </ol>
+
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+            <div class="item active">
+              <a href="#">
+                <div class="center-cropped" 
+                     style="background-image: url('/assets/img/crew-dragon.jpg');">
+                </div>
+              </a>
+              <div class="container">
+                <div class="carousel-caption">
+                  <h2>Crew Dragon</h2>
+                  <p>2 Passanger Space</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="center-cropped" 
+                   style="background-image: url('/assets/img/silver_1.jpeg');">
+              </div>
+              <div class="container">
+                <div class="carousel-caption">
+                  <h2>Silver Hawk</h2>
+                  <p>Sattelite</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="center-cropped" 
+                   style="background-image: url('/assets/img/SpaceX-capsule.jpg');">
+              </div>
+              <div class="container">
+                <div class="carousel-caption">
+                  <h2>Hydra Capsule</h2>
+                  <p>1,500,000 Passanger Space</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Left and right controls -->
+          <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="container">
+        <!-- Example row of columns -->
+        <div class="row featured">
+          <div class="col-md-12">
+            <span class="title">Featured Item</span>
+            <span class="pull-right">View More</span>
+          </div>
+        </div>
+        <div class="row item">
+          <div class="col-md-2 card" v-for="il in itemList">
+            <div class="center-thumb" :style="{ 'background-image': 'url(' + il.image + ')' }"> 
+            </div>
+            <div class="desc">
+              <h4>{{ il.itemName }}</h4>
+              <p>Specification:</p>
+              <div v-for='s in il.specification'>
+                <p>{{ Object.keys(s)[0] }}: {{ Object.values(s)[0] }}</p>
+              </div>
+              <p>Category: {{ il.category }}</p>
+            </div>
+            <div class="price">
+              Rp. {{ il.priceidr }}
+            </div>
+            <div class="button">
+              <p><a v-on:click="addtocart(il)" class="btn btn-default" href="#" role="button">Add to Cart &raquo;</a></p>
+            </div>
+          </div>
+        </div>
+      </div> <!-- /container -->
+      
+      <hr>
+      
+      <footer class="foot">
+        <div class="container">
+          <div class="row about">
+            <div class="col-md-4 col-xs-4">
+              <h5>Catagories</h5>
+              <ul class="nolist">
+                <li>Rocket</li>
+                <li>Sattelites</li>
+                <li>One Way Ticket</li>
+                <li>Space Suit</li>
+              </ul>
+            </div>
+            <div class="col-md-4 col-xs-4">
+              <h5>Find Us</h5>
+              <ul class="nolist">
+                <li>Twitter</li>
+                <li>Facebook</li>
+                <li>Google Plus</li>
+                <li>Instagram</li>
+              </ul>
+            </div>
+            <div class="col-md-4 col-xs-4">
+              <h5 class="pull-right">&copy; Rocksell 2017 Company, Inc.</h5>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+    
+    <!-- vue instance -->
+    <script>
+      var vue = new Vue ({
+        el: '#app',
+        data: {
+          itemList: [],
+          cart: [],
+          total: 0
+        },
+        methods: {
+          getAllItem(){
+            axios.get('http://localhost:3000/item')
+            .then(response=>{
+              this.itemList = response.data
+            }).catch(err=>{
+              console.error();
+            })
+          },
+          addtocart(id){
+            var pos = this.checkId(id._id)
+            if(pos>=0){
+              this.cart[pos].qty += 1
+              this.total += this.cart[pos].priceidr
+              this.cart[pos].totalitem += this.cart[pos].priceidr
+            } else {
+              let item = this.itemList.find(element=>{
+                  return element._id == id._id
+              })
+              this.cart.push({
+                itemid: item._id,
+                name: item.itemName,
+                priceidr: item.priceidr,
+                qty: 1,
+                totalitem: item.priceidr
+              })
+              this.total += item.priceidr;
+            }
+          },
+          checkId(num){
+            return this.cart.findIndex(element=>{
+              return element.itemid == num
+            });
+          },
+          delId(deleteid){
+            let pos = this.cart.findIndex(element=>{
+              return deleteid.itemid == element.itemid
+            });
+            // console.log(pos);
+            this.total -= this.cart[pos].totalitem
+            this.cart.splice(pos,1)
+            $("#cart").modal("show");
+          }
+        },
+        created() {
+          this.getAllItem();
+        }
+      })
+    </script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>

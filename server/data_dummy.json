@@ -1,0 +1,70 @@
+{
+  "item": [
+    {
+      "_id": 1,
+      "itemName": "Dragon Crew",
+      "image": "/assets/img/crew-dragon.jpg",
+      "specification": [
+        {"passanger": 2},
+        {"engine": "Nuclear reactor injector"}
+      ],
+      "category": "rocket",
+      "priceidr": 1500000000
+    },
+    {
+      "_id": 2,
+      "itemName": "Silver Hawk",
+      "image": "/assets/img/silver_1.jpeg",
+      "specification": [
+        {"passanger": ""},
+        {"engine": "Solar Reactor"}
+      ],
+      "category": "sattelites",
+      "priceidr": 100000000
+    },
+    {
+      "_id": 3,
+      "itemName": "Hydra Capsule",
+      "image": "/assets/img/SpaceX-capsule.jpg",
+      "specification": [
+        {"passanger": 1500000},
+        {"engine": "Engine: Solar, Nuclear, Hybrid"}
+      ],
+      "category": "rocket",
+      "priceidr": 10000000000
+    },
+    {
+      "_id": 4,
+      "itemName": "One Way Mars Ticket",
+      "image": "/assets/img/one-way.jpg",
+      "specification": [
+        {"passanger": 5},
+        {"engine": "Venus Gas"}
+      ],
+      "category": "one_way_ticket",
+      "priceidr": 10000000
+    },
+    {
+      "_id": 5,
+      "itemName": "Moon Catcher",
+      "image": "/assets/img/mars-colonial-b.png",
+      "specification": [
+        {"passanger": 5},
+        {"engine": "Earth Gas"}
+      ],
+      "category": "rocket",
+      "priceidr": 100000000
+    },
+    {
+      "_id": 6,
+      "itemName": "Space Suit",
+      "image": "/assets/img/suit.jpg",
+      "specification": [
+        {"solar guard": true},
+        {"o2_capacity": 10}
+      ],
+      "category": "space_suit",
+      "priceidr": 100000
+    }
+  ]
+}
