@@ -1,16 +1,20 @@
 const app = require('express')()
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
+const cors = require('cors')
 
 app.use(bodyParser.urlencoded({ extended: false })) // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()) // parse application/json
 app.use(morgan('tiny'))
+app.use(cors())
 
 //route variable
 const index = require('./routers/indexRouter')
+const shop  = require('./routers/shopRouter')
 
 //route use
 app.use('/', index)
+app.use('/api/shop/', shop)
 
 //listen
 app.listen(3000, () => {

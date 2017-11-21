@@ -16,7 +16,7 @@
       "itemName": "Silver Hawk",
       "image": "/assets/img/silver_1.jpeg",
       "specification": [
-        {"passanger": ""},
+        {"passanger": "-"},
         {"engine": "Solar Reactor"}
       ],
       "category": "sattelites",
@@ -28,7 +28,7 @@
       "image": "/assets/img/SpaceX-capsule.jpg",
       "specification": [
         {"passanger": 1500000},
-        {"engine": "Engine: Solar, Nuclear, Hybrid"}
+        {"engine": "Solar, Nuclear, Hybrid"}
       ],
       "category": "rocket",
       "priceidr": 10000000000
@@ -60,7 +60,7 @@
       "itemName": "Space Suit",
       "image": "/assets/img/suit.jpg",
       "specification": [
-        {"solar guard": true},
+        {"solar_guard": true},
         {"o2_capacity": 10}
       ],
       "category": "space_suit",

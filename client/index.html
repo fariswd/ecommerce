@@ -115,7 +115,7 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default">Checkout</button>
+              <button type="button" class="btn btn-default" v-on:click="checkout()">Checkout</button>
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
           </div>
@@ -210,7 +210,7 @@
               Rp. {{ il.priceidr }}
             </div>
             <div class="button">
-              <p><a v-on:click="addtocart(il)" class="btn btn-default" href="#" role="button">Add to Cart &raquo;</a></p>
+              <p><a v-on:click="addtocart(il)" class="btn btn-default" role="button">Add to Cart &raquo;</a></p>
             </div>
           </div>
         </div>
@@ -259,8 +259,9 @@
         },
         methods: {
           getAllItem(){
-            axios.get('http://localhost:3000/item')
+            axios.get('http://localhost:3000/api/shop/item')
             .then(response=>{
+              console.log(response)
               this.itemList = response.data
             }).catch(err=>{
               console.error();
@@ -299,6 +300,21 @@
             this.total -= this.cart[pos].totalitem
             this.cart.splice(pos,1)
             $("#cart").modal("show");
+          },
+          checkout(){
+            axios.post('http://localhost:3000/api/shop/checkout', {
+              cart: this.cart,
+              total: this.total
+            })
+            .then(function (response) {
+              this.cart = []
+              this.total = 0
+              alert('Your order has been received')
+              location.reload(); 
+            })
+            .catch(function (error) {
+              console.error(error);
+            });
           }
         },
         created() {
