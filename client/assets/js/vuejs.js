@@ -8,7 +8,7 @@ var vue = new Vue ({
   },
   methods: {
     getAllItem(){
-      axios.get('http://serangg.ga:3000/api/shop/item')
+      axios.get('http://api.serangg.ga:3000/api/shop/item')
       .then(response=>{
         this.itemList = response.data
       }).catch(err=>{
@@ -49,7 +49,7 @@ var vue = new Vue ({
       $("#cart").modal("show");
     },
     checkout(){
-      axios.post('http://serangg.ga:3000/api/shop/checkout', {
+      axios.post('http://api.serangg.ga:3000/api/shop/checkout', {
         cart: this.cart,
         total: this.total
       })
@@ -64,7 +64,7 @@ var vue = new Vue ({
       });
     },
     gettransaction(){
-      axios.get('http://serangg.ga:3000/api/shop/transaction')
+      axios.get('http://api.serangg.ga:3000/api/shop/transaction')
       .then(response=>{
         console.log(response.data);
         this.transaction = response.data
