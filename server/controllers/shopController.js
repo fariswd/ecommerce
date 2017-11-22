@@ -86,10 +86,22 @@ let getItem = (req, res) => {
   })  
 }
 
+/* Delete specific item by id
+*/
+let delItem = (req, res) => {
+  Item.remove({ _id:req.params.id })
+  .then(response=>{
+    res.send({response: response})
+  }).catch(err=>{
+    res.send({err: err})
+  })
+}
+
 module.exports = {
   welcomePage,
   checkout,
   allTrans,
   addItem,
-  getItem
+  getItem,
+  delItem
 };

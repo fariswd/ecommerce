@@ -14,5 +14,7 @@ router.post('/additem', shopController.addItem)
 
 router.get('/item', shopController.getItem)
 
+router.delete('/item/:id', shopController.delItem)
+
 //export
 module.exports = router;
