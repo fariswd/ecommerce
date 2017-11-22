@@ -23,7 +23,6 @@ function logout() {
 }
 
 (function (){
-  console.log('==================')
   if(localStorage.getItem("islogin")){
     $('.container').empty();
     $('.container').load('assets/template/admin.html')

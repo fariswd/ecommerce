@@ -1,201 +1,233 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Dashboard</a>
+<div id="app">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Dashboard</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/login.html">Dashboard</a></li>
+          <li><a class="test" onclick="logout()" href="#">Logout</a></li>
+        </ul>
+      </div>
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Dashboard</a></li>
-        <li><a href="#">Settings</a></li>
-        <li><a href="#">Profile</a></li>
-        <li><a class="test" onclick="logout()" href="#">Logout</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+  </nav>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
-      <ul class="nav nav-sidebar">
-        <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Reports</a></li>
-        <li><a href="#">Analytics</a></li>
-        <li><a href="#">Export</a></li>
-      </ul>
-      <ul class="nav nav-sidebar">
-        <li><a href="">Nav item</a></li>
-        <li><a href="">Nav item again</a></li>
-        <li><a href="">One more nav</a></li>
-        <li><a href="">Another nav item</a></li>
-        <li><a href="">More navigation</a></li>
-      </ul>
-      <ul class="nav nav-sidebar">
-        <li><a href="">Nav item again</a></li>
-        <li><a href="">One more nav</a></li>
-        <li><a href="">Another nav item</a></li>
-      </ul>
-    </div>
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-      <h1 class="page-header">Dashboard</h1>
+  <!-- Modal -->
+  <div id="transaction" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
-      <div class="row placeholders">
-        <div class="col-xs-6 col-sm-3 placeholder">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-          <h4>Label</h4>
-          <span class="text-muted">Something else</span>
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Transaction</h4>
         </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-          <h4>Label</h4>
-          <span class="text-muted">Something else</span>
+        <div class="modal-body" v-for="t in transaction">
+          <div class="row header_trans">
+            <div class="col-md-3">
+              Transaction no:
+            </div>
+            <div class="col-md-4">
+              {{ t._id }}
+            </div>
+            <div class="col-md-4">
+              {{ t.createdAt }}
+            </div>
+          </div>
+          <div class="row data_trans" v-for="(r,i) in t.receipt" >
+            <div class="col-md-1">
+              {{ i+1 }}
+            </div>
+            <div class="col-md-3">
+              {{ r.name }}
+            </div>
+            <div class="col-md-1">
+              {{ r.qty }}
+            </div>
+            <div class="col-md-3 right_align">
+              {{ r.priceidr }}
+            </div>
+            <div class="col-md-3 right_align">
+              {{ r.totalitem }}
+            </div>
+          </div>
+          <div class="row footer_trans">
+            <div class="col-md-8 grand_total">
+              Grandtotal
+            </div>
+            <div class="col-md-3 grand_total_value right_align">
+              {{ t.grandtotal }}
+            </div>
+          </div>
         </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-          <h4>Label</h4>
-          <span class="text-muted">Something else</span>
-        </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-          <h4>Label</h4>
-          <span class="text-muted">Something else</span>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
 
-      <h2 class="sub-header">Section title</h2>
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Header</th>
-              <th>Header</th>
-              <th>Header</th>
-              <th>Header</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1,001</td>
-              <td>Lorem</td>
-              <td>ipsum</td>
-              <td>dolor</td>
-              <td>sit</td>
-            </tr>
-            <tr>
-              <td>1,002</td>
-              <td>amet</td>
-              <td>consectetur</td>
-              <td>adipiscing</td>
-              <td>elit</td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>Integer</td>
-              <td>nec</td>
-              <td>odio</td>
-              <td>Praesent</td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>libero</td>
-              <td>Sed</td>
-              <td>cursus</td>
-              <td>ante</td>
-            </tr>
-            <tr>
-              <td>1,004</td>
-              <td>dapibus</td>
-              <td>diam</td>
-              <td>Sed</td>
-              <td>nisi</td>
-            </tr>
-            <tr>
-              <td>1,005</td>
-              <td>Nulla</td>
-              <td>quis</td>
-              <td>sem</td>
-              <td>at</td>
-            </tr>
-            <tr>
-              <td>1,006</td>
-              <td>nibh</td>
-              <td>elementum</td>
-              <td>imperdiet</td>
-              <td>Duis</td>
-            </tr>
-            <tr>
-              <td>1,007</td>
-              <td>sagittis</td>
-              <td>ipsum</td>
-              <td>Praesent</td>
-              <td>mauris</td>
-            </tr>
-            <tr>
-              <td>1,008</td>
-              <td>Fusce</td>
-              <td>nec</td>
-              <td>tellus</td>
-              <td>sed</td>
-            </tr>
-            <tr>
-              <td>1,009</td>
-              <td>augue</td>
-              <td>semper</td>
-              <td>porta</td>
-              <td>Mauris</td>
-            </tr>
-            <tr>
-              <td>1,010</td>
-              <td>massa</td>
-              <td>Vestibulum</td>
-              <td>lacinia</td>
-              <td>arcu</td>
-            </tr>
-            <tr>
-              <td>1,011</td>
-              <td>eget</td>
-              <td>nulla</td>
-              <td>Class</td>
-              <td>aptent</td>
-            </tr>
-            <tr>
-              <td>1,012</td>
-              <td>taciti</td>
-              <td>sociosqu</td>
-              <td>ad</td>
-              <td>litora</td>
-            </tr>
-            <tr>
-              <td>1,013</td>
-              <td>torquent</td>
-              <td>per</td>
-              <td>conubia</td>
-              <td>nostra</td>
-            </tr>
-            <tr>
-              <td>1,014</td>
-              <td>per</td>
-              <td>inceptos</td>
-              <td>himenaeos</td>
-              <td>Curabitur</td>
-            </tr>
-            <tr>
-              <td>1,015</td>
-              <td>sodales</td>
-              <td>ligula</td>
-              <td>in</td>
-              <td>libero</td>
-            </tr>
-          </tbody>
-        </table>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li class="active"><a href="#">Add item <span class="sr-only">(current)</span></a></li>
+          <li><a data-toggle="modal" data-target="#transaction" href="" v-on:click="gettransaction">History Transaction</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <!-- <h1 class="page-header">Add Item</h1> -->
+        <!-- form add item here -->
+        <div class="row">
+              <legend>Add Item</legend>
+              <div class="form-group">
+                <label for="name">Item Name</label>
+                <input v-model="name" class="form-control" id="name" ref="name" placeholder="Item Name" type="text">
+              </div>
+              <div class="form-group">
+                <label for="image">Image Link</label>
+                <input v-model="image" class="form-control" id="image" placeholder="Image Link" type="text">
+              </div>
+              <legend>Specification</legend>
+              <div class="form-group col-md-6">
+                <label for="spec1key">Specification Name 1</label>
+                <input v-model="spec1key" class="form-control" id="spec1key" placeholder="Specification Name" type="text">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="spec1value">Value</label>
+                <input v-model="spec1value" class="form-control" id="spec1value" placeholder="Specification Value" type="text">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="spec1key">Specification Name 2</label>
+                <input v-model="spec2key" class="form-control" id="spec2key" placeholder="Specification Name" type="text">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="spec1value">Value</label>
+                <input v-model="spec2value" class="form-control" id="spec2value" placeholder="Specification Value" type="text">
+              </div>
+              <div class="form-group">
+                <label for="category">Catagory</label>
+                <input v-model="category" class="form-control" id="category" placeholder="Category" type="text">
+              </div>
+              <div class="form-group">
+                <label for="priceidr">Price</label>
+                <input v-model="priceidr" class="form-control" id="priceidr" placeholder="Price idr" type="text">
+              </div>
+              <div class="form-group">
+                <button v-on:click="postNewItem" form="form" type="submit" value="Submit" class="btn btn-primary">Submit</button>
+              </div>
+        </div>
+        
+        <!-- list of item here -->
+        <!-- <h2 class="sub-header">Section title</h2>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Item Name</th>
+                <th>Image Loc</th>
+                <th>Spec1</th>
+                <th>Value Spec1</th>
+                <th>Spec2</th>
+                <th>Value Spec2</th>
+                <th>Category</th>
+                <th>Price Idr</th>
+              </tr>
+            </thead>
+            <tbody>
+              <div v-for="ils in itemList">
+                <tr>
+                  <td>{{ 1+1 }}</td>
+                  <td>{{ ils.itemName }}</td>
+                  <td>{{ ils.image }}</td>
+                  <td>{{ ils.category }}</td>
+                  <td>{{ ils.priceidr }}</td>
+                  <div class="" v-for='s in ils.specification'>
+                    <td>{{ Object.keys(s)[0] }}</td>
+                    <td>{{ Object.values(s)[0] }}</td>
+                  </div>
+                </tr>
+              </div>
+            </tbody>
+          </table>
+        </div> -->
       </div>
     </div>
   </div>
 </div>
+<!-- vue instance -->
+<script>
+var vue = new Vue ({
+  el: '#app',
+  data: {
+    transaction: [],
+    name: "",
+    image: "",
+    category: "",
+    priceidr: "",
+    spec1key: null,
+    spec1value: null,
+    spec2key: null,
+    spec2value: null
+  },
+  methods: {
+    postNewItem(){
+        axios.post('http://api.serangg.ga:3000/api/shop/additem', {
+        itemName: this.itemName,
+        image: this.image,
+        spec1key: this.spec1key,
+        spec1value: this.spec1value,
+        spec2key: this.spec2key,
+        spec2value: this.spec2value,
+        category: this.category,
+        priceidr: this.priceidr
+      })
+      .then(function (response) {
+        // let obj = {
+        //   itemName: req.body.name,
+        //   image: req.body.image,
+        //   specification: [
+        //     spec1,
+        //     spec2
+        //   ],
+        //   category: req.body.category,
+        //   priceidr: req.body.priceidr
+        // }
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    },
+    getAllItem(){
+      axios.get('http://api.serangg.ga:3000/api/shop/allTrans')
+      .then(response=>{
+        this.transaction = response.data
+      }).catch(err=>{
+        console.error();
+      })
+    },
+    gettransaction(){
+      axios.get('http://api.serangg.ga:3000/api/shop/transaction')
+      .then(response=>{
+        console.log(response.data);
+        this.transaction = response.data
+      }).catch(err=>{
+        console.error();
+      })
+    }
+  },
+  created() {
+    this.getAllItem();
+  }
+})
+</script>
