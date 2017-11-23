@@ -86,6 +86,54 @@ let getItem = (req, res) => {
   })  
 }
 
+/* PUT item
+*  Require: params:id
+*           itemName,
+*           image(location),
+*           specification[
+*             {spec1key: spec1value}
+*             {spec2key: spec2value}
+*           ],
+*           catagory,
+*           priceidr
+*  Desc: Update to database
+*/
+let updItem = (req, res) => {
+  Item.findById(req.params.id)
+    .then(before=>{
+      let spec1 = {}
+      let spec2 = {}
+      spec1[req.body.spec1key] = req.body.spec1value
+      spec2[req.body.spec2key] = req.body.spec2value  
+
+      Item.update({ _id: req.params.id }, {
+        itemName: req.body.name,
+        image: req.body.image,
+        specification: [
+          spec1,
+          spec2
+        ],
+        category: req.body.category,
+        priceidr: req.body.priceidr
+      })
+      .then(result=>{
+        if(result.nModified == 1){
+          res.send({
+            status: "success",
+            user: req.decoded,
+            before: before
+          })
+        } else {
+          res.status(500).send({err: "unsuccessfull edit"})
+        }
+      }).catch(err=>{
+        res.status(500).send({err: err})
+      })
+    }).catch(err=>{
+      res.status(500).send({err: err})
+})
+}
+
 /* Delete specific item by id
 */
 let delItem = (req, res) => {
@@ -103,5 +151,6 @@ module.exports = {
   allTrans,
   addItem,
   getItem,
+  updItem,
   delItem
 };

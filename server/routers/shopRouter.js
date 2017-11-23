@@ -14,6 +14,8 @@ router.post('/additem', shopController.addItem)
 
 router.get('/item', shopController.getItem)
 
+router.put('/item/:id', shopController.updItem)
+
 router.delete('/item/:id', shopController.delItem)
 
 //export

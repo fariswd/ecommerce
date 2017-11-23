@@ -170,6 +170,7 @@ var vue = new Vue ({
   el: '#app',
   data: {
     transaction: [],
+    item: [],
     name: "",
     image: "",
     category: "",
@@ -208,10 +209,11 @@ var vue = new Vue ({
         console.log(error);
       });
     },
-    getAllItem(){
+    getitem(){
       axios.get('http://api.serangg.ga:3000/api/shop/allTrans')
       .then(response=>{
-        this.transaction = response.data
+        console.log('================here')
+        this.item = response.data
       }).catch(err=>{
         console.error();
       })
@@ -227,7 +229,7 @@ var vue = new Vue ({
     }
   },
   created() {
-    this.getAllItem();
+    this.getitem();
   }
 })
 </script>

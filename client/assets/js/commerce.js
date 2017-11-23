@@ -3,9 +3,10 @@ $( "form" ).submit(function(event) {
     if($('#inputPassword').val() == '123'){
       console.log('login success');
       localStorage.setItem('islogin', $('#inputEmail').val());
+      window.location.replace("admin.html");
       // alert('welcome '+ $('#inputEmail').val())
-      $('.container').empty();
-      $('.container').load('assets/template/admin.html')
+      // $('.container').empty();
+      // $('.container').load('assets/template/admin.html')
     } else {
       console.log('wrong input')
       alert('wrong input')
@@ -24,7 +25,8 @@ function logout() {
 
 (function (){
   if(localStorage.getItem("islogin")){
-    $('.container').empty();
-    $('.container').load('assets/template/admin.html')
+    window.location.replace("admin.html");
+    // $('.container').empty();
+    // $('.container').load('assets/template/admin.html')
   }
 }())
