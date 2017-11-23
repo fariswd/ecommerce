@@ -1,5 +1,5 @@
 # ecommerce
-Selling Rocket & Space Gear  
+Selling Rocket & Space Gear http://rocksell.masfaris.com or backup http://shop.serangg.ga.com
 
 ## Frontend Library use:  
 - Bootstrap- styling & grid system
@@ -13,7 +13,7 @@ Selling Rocket & Space Gear
 | /api/shop/checkout | POST | cart(array),total | post checkout add to database |
 | /api/shop/alltrans | GET | - | get all transaction |
 | /api/shop/additem | POST | itemName,image,.... | save item to database |
-| /api/shop/getitem | GET | - | get all item |
+| /api/shop/item | GET | - | get all item |
 
 ## Use this app?
 ### /server
