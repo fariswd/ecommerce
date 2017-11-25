@@ -6,6 +6,6 @@ Library use:
 - Bootstrap- styling & grid system
 - Vue- Frontend Framework
 - JQuery- setup localStorage for login system
-- Temporary admin username:password = ca@pung.com:123
+- Temporary admin username:password = admin:admin
 
 :rocket:

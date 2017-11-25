@@ -1,5 +1,5 @@
 $( "form" ).submit(function(event) {
-  if($('#inputEmail').val() == 'admin@admin.com'){
+  if($('#inputEmail').val() == 'admin'){
     if($('#inputPassword').val() == 'admin'){
       console.log('login success');
       localStorage.setItem('islogin', $('#inputEmail').val());
@@ -9,11 +9,11 @@ $( "form" ).submit(function(event) {
       // $('.container').load('assets/template/admin.html')
     } else {
       console.log('wrong input')
-      alert('wrong input')
+      alert('wrong input, password ada di readme')
     }
   } else {
     console.log('wrong input')
-    alert('wrong input')
+    alert('wrong input, password ada di readme')
   }
   
 });
