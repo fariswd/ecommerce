@@ -1,6 +1,6 @@
 $( "form" ).submit(function(event) {
-  if($('#inputEmail').val() == 'ca@pung.com'){
-    if($('#inputPassword').val() == '123'){
+  if($('#inputEmail').val() == 'admin@admin.com'){
+    if($('#inputPassword').val() == 'admin'){
       console.log('login success');
       localStorage.setItem('islogin', $('#inputEmail').val());
       window.location.replace("admin.html");

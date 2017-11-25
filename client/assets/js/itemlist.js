@@ -28,8 +28,8 @@ Vue.component('item-list', {
           <td>{{ item.category }}</td>
           <td>{{ item.priceidr }}</td>
           <td>
-            <span class="badge badge-pill badge-danger">Delete</span>
-            <span class="badge badge-pill badge-warning" @click="edit(index)">Edit</span>
+            <button class="badge badge-pill badge-danger" @click="remove(index)">Delete</button>
+            <a class="badge badge-pill badge-warning" @click="edit(index)">Edit</a>
           </td>
         </tr>
       </tbody>
@@ -52,8 +52,21 @@ Vue.component('item-list', {
       let item = this.items[i]
       console.log('ini item di child ', item)
       this.$emit('populate-item', {
-        item: item
+        item: item,
+        i: i
       })
+    },
+    remove: function(i){
+      let item = this.items[i]
+      console.log('ini item di remove ', item)
+      axios.delete('http://localhost:3000/api/shop/item/'+item._id)
+      .then((response)=>{
+        console.log(response.data);
+        this.items.splice(i,1)
+      })
+      .catch((error)=>{
+        console.log(error);
+      });
     }
   }
 })

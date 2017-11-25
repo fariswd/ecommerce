@@ -96,7 +96,7 @@
         <div class="row">
           <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-              <li class="active"><a href="#">Add item <span class="sr-only">(current)</span></a></li>
+              <li class="active"><a href="#" @click='modeAdd'>Add item <span class="sr-only">(current)</span></a></li>
               <li><a data-toggle="modal" data-target="#transaction" href="" v-on:click="gettransaction">History Transaction</a></li>
             </ul>
           </div>
@@ -176,13 +176,14 @@
         spec1key: null,
         spec1value: null,
         spec2key: null,
-        spec2value: null
+        spec2value: null,
+        pos: ''
       },
       methods: {
-        postNewItem(){
+        postNewItem: function(){
           if(this.itemid == ""){
-            axios.post('http://api.serangg.ga:3000/api/shop/additem', {
-              itemName: this.itemName,
+            axios.post('http://localhost:3000/api/shop/additem/', {
+              itemName: this.name,
               image: this.image,
               spec1key: this.spec1key,
               spec1value: this.spec1value,
@@ -191,15 +192,17 @@
               category: this.category,
               priceidr: this.priceidr
             })
-            .then(function (response) {
-              console.log(response.data);
+            .then((response)=>{
+              this.itemList.push(response.data.item)
+              alert("Add success!");
+              this.modeAdd()
             })
-            .catch(function (error) {
+            .catch((error)=>{
               console.log(error);
             });
             } else {
               axios.put('http://localhost:3000/api/shop/item/'+this.itemid, {
-                itemName: this.itemName,
+                name: this.name,
                 image: this.image,
                 spec1key: this.spec1key,
                 spec1value: this.spec1value,
@@ -208,27 +211,32 @@
                 category: this.category,
                 priceidr: this.priceidr
               })
-              .then(function (response) {
-                console.log(response.data);
+              .then((response)=>{
+                console.log(response.data.after);
+                this.itemList.splice(this.pos,1,response.data.after)
+                alert("Edit success!");
+                this.modeAdd()
               })
-              .catch(function (error) {
+              .catch((error)=>{
                 console.log(error);
               });
           }
         },
-        populates(payload){
-          this.itemid = payload.item._id,
-          this.name = payload.item.itemname,
-          this.image = payload.item.image,
-          this.category = payload.item.category,
-          this.priceidr = payload.item.priceidr,
-          this.spec1key = Object.keys(payload.item.specification[0])[0],
-          this.spec1value = Object.values(payload.item.specification[0])[0],
-          this.spec2key = Object.keys(payload.item.specification[1])[0],
+        populates: function(payload){
+          this.itemid = payload.item._id
+          this.name = payload.item.itemName
+          this.image = payload.item.image
+          this.category = payload.item.category
+          this.priceidr = payload.item.priceidr
+          this.spec1key = Object.keys(payload.item.specification[0])[0]
+          this.spec1value = Object.values(payload.item.specification[0])[0]
+          this.spec2key = Object.keys(payload.item.specification[1])[0]
           this.spec2value = Object.values(payload.item.specification[1])[0]
-          
+          this.legend = 'Edit Item'
+          this.buttonlegend = 'Edit'
+          this.pos = payload.i
         },
-        getitem(){
+        getitem: function(){
           axios.get('http://api.serangg.ga:3000/api/shop/item')
           .then(response=>{
             this.itemList = response.data
@@ -236,7 +244,7 @@
             console.error();
           })
         },
-        gettransaction(){
+        gettransaction: function(){
           axios.get('http://api.serangg.ga:3000/api/shop/transaction')
           .then(response=>{
             console.log(response.data);
@@ -245,20 +253,33 @@
             console.error();
           })
         },
-        updateLegend(){
+        updateLegend: function(){
           this.legend = 'Edit Item'
           this.buttonlegend = 'Edit'
         },
-        logout() {
+        logout: function() {
           localStorage.removeItem('islogin');
           location.reload(); 
         },
-        checklogin (){
+        checklogin: function (){
           if(!localStorage.getItem("islogin")){
             window.location.replace("login.html");
             // $('.container').empty();
             // $('.container').load('assets/template/admin.html')
           }
+        },
+        modeAdd: function(){
+          this.itemid = ''
+          this.name = ''
+          this.image = ''
+          this.category = ''
+          this.priceidr = ''
+          this.spec1key = ''
+          this.spec1value = ''
+          this.spec2key = ''
+          this.spec2value = ''
+          this.legend = 'Add Item'
+          this.buttonlegend = 'Submit'
         }
       },
       created() {

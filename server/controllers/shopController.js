@@ -55,7 +55,7 @@ let addItem = (req, res) => {
   spec2[req.body.spec2key] = req.body.spec2value  
   
   let item = new Item ({
-    itemName: req.body.name,
+    itemName: req.body.itemName,
     image: req.body.image,
     specification: [
       spec1,
@@ -104,9 +104,8 @@ let updItem = (req, res) => {
       let spec1 = {}
       let spec2 = {}
       spec1[req.body.spec1key] = req.body.spec1value
-      spec2[req.body.spec2key] = req.body.spec2value  
-
-      Item.update({ _id: req.params.id }, {
+      spec2[req.body.spec2key] = req.body.spec2value
+      let obj = {
         itemName: req.body.name,
         image: req.body.image,
         specification: [
@@ -115,13 +114,15 @@ let updItem = (req, res) => {
         ],
         category: req.body.category,
         priceidr: req.body.priceidr
-      })
+      }  
+      Item.update({ _id: req.params.id }, obj)
       .then(result=>{
         if(result.nModified == 1){
           res.send({
             status: "success",
             user: req.decoded,
-            before: before
+            before: before,
+            after: obj
           })
         } else {
           res.status(500).send({err: "unsuccessfull edit"})
