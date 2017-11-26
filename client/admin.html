@@ -182,7 +182,7 @@
       methods: {
         postNewItem: function(){
           if(this.itemid == ""){
-            axios.post('http://localhost:3000/api/shop/additem/', {
+            axios.post('http://api.serangg.ga:3000/api/shop/additem/', {
               itemName: this.name,
               image: this.image,
               spec1key: this.spec1key,
@@ -201,7 +201,7 @@
               console.log(error);
             });
             } else {
-              axios.put('http://localhost:3000/api/shop/item/'+this.itemid, {
+              axios.put('http://api.serangg.ga:3000/api/shop/item/'+this.itemid, {
                 name: this.name,
                 image: this.image,
                 spec1key: this.spec1key,

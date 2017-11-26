@@ -59,7 +59,7 @@ Vue.component('item-list', {
     remove: function(i){
       let item = this.items[i]
       console.log('ini item di remove ', item)
-      axios.delete('http://localhost:3000/api/shop/item/'+item._id)
+      axios.delete('http://api.serangg.ga:3000/api/shop/item/'+item._id)
       .then((response)=>{
         console.log(response.data);
         this.items.splice(i,1)
