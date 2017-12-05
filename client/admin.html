@@ -182,7 +182,7 @@
       methods: {
         postNewItem: function(){
           if(this.itemid == ""){
-            axios.post('http://api.serangg.ga:3000/api/shop/additem/', {
+            axios.post('http://vps.masfaris.com:3000/api/shop/additem/', {
               itemName: this.name,
               image: this.image,
               spec1key: this.spec1key,
@@ -201,7 +201,8 @@
               console.log(error);
             });
             } else {
-              axios.put('http://api.serangg.ga:3000/api/shop/item/'+this.itemid, {
+              console.log('masuk di edit');
+              axios.put('http://vps.masfaris.com:3000/api/shop/item/'+this.itemid, {
                 name: this.name,
                 image: this.image,
                 spec1key: this.spec1key,
@@ -237,7 +238,7 @@
           this.pos = payload.i
         },
         getitem: function(){
-          axios.get('http://api.serangg.ga:3000/api/shop/item')
+          axios.get('http://vps.masfaris.com:3000/api/shop/item')
           .then(response=>{
             this.itemList = response.data
           }).catch(err=>{
@@ -245,7 +246,7 @@
           })
         },
         gettransaction: function(){
-          axios.get('http://api.serangg.ga:3000/api/shop/transaction')
+          axios.get('http://vps.masfaris.com:3000/api/shop/transaction')
           .then(response=>{
             console.log(response.data);
             this.transaction = response.data

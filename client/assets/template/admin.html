@@ -182,7 +182,7 @@ var vue = new Vue ({
   },
   methods: {
     postNewItem(){
-        axios.post('http://api.serangg.ga:3000/api/shop/additem', {
+        axios.post('http://vps.masfaris.com:3000/api/shop/additem', {
         itemName: this.itemName,
         image: this.image,
         spec1key: this.spec1key,
@@ -210,7 +210,7 @@ var vue = new Vue ({
       });
     },
     getitem(){
-      axios.get('http://api.serangg.ga:3000/api/shop/allTrans')
+      axios.get('http://vps.masfaris.com:3000/api/shop/allTrans')
       .then(response=>{
         console.log('================here')
         this.item = response.data
@@ -219,7 +219,7 @@ var vue = new Vue ({
       })
     },
     gettransaction(){
-      axios.get('http://api.serangg.ga:3000/api/shop/transaction')
+      axios.get('http://vps.masfaris.com:3000/api/shop/transaction')
       .then(response=>{
         console.log(response.data);
         this.transaction = response.data

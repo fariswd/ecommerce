@@ -1,5 +1,5 @@
 # ecommerce
-Selling Rocket & Space Gear http://rocksell.masfaris.com or backup http://shop.serangg.ga
+Selling Rocket & Space Gear http://rocksell.masfaris.com  
 
 ## Frontend Library use:  
 - Bootstrap- styling & grid system
