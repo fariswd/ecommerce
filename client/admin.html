@@ -28,6 +28,9 @@
             <a class="navbar-brand" href="#">Dashboard</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+              <li><a href="/index.html">Home</a></li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="/login.html">Dashboard</a></li>
               <li><a class="logout" @click="logout()" href="#">Logout</a></li>
@@ -141,8 +144,8 @@
                     <input v-model="category" class="form-control" id="category" placeholder="Category" type="text">
                   </div>
                   <div class="form-group">
-                    <label for="priceidr">Price</label>
-                    <input v-model="priceidr" class="form-control" id="priceidr" placeholder="Price idr" type="text">
+                    <label for="priceidr">Price (please input number)</label>
+                    <input v-model="priceidr" class="form-control" id="priceidr" placeholder="Price idr" type="number">
                   </div>
                   <div class="form-group">
                     <button v-on:click="postNewItem" form="form" type="submit" value="Submit" class="btn btn-primary">{{ buttonlegend }}</button>
@@ -172,7 +175,7 @@
         name: "",
         image: "",
         category: "",
-        priceidr: "",
+        priceidr: 0,
         spec1key: null,
         spec1value: null,
         spec2key: null,
@@ -201,7 +204,6 @@
               console.log(error);
             });
             } else {
-              console.log('masuk di edit');
               axios.put('http://vps.masfaris.com:3000/api/shop/item/'+this.itemid, {
                 name: this.name,
                 image: this.image,
@@ -213,7 +215,6 @@
                 priceidr: this.priceidr
               })
               .then((response)=>{
-                console.log(response.data.after);
                 this.itemList.splice(this.pos,1,response.data.after)
                 alert("Edit success!");
                 this.modeAdd()
@@ -248,7 +249,6 @@
         gettransaction: function(){
           axios.get('http://vps.masfaris.com:3000/api/shop/transaction')
           .then(response=>{
-            console.log(response.data);
             this.transaction = response.data
           }).catch(err=>{
             console.error();

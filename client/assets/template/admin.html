@@ -118,8 +118,8 @@
                 <input v-model="category" class="form-control" id="category" placeholder="Category" type="text">
               </div>
               <div class="form-group">
-                <label for="priceidr">Price</label>
-                <input v-model="priceidr" class="form-control" id="priceidr" placeholder="Price idr" type="text">
+                <label for="priceidr">Price must a number</label>
+                <input v-model="priceidr" class="form-control" id="priceidr" placeholder="Price idr">
               </div>
               <div class="form-group">
                 <button v-on:click="postNewItem" form="form" type="submit" value="Submit" class="btn btn-primary">Submit</button>
@@ -174,7 +174,7 @@ var vue = new Vue ({
     name: "",
     image: "",
     category: "",
-    priceidr: "",
+    priceidr: 0,
     spec1key: null,
     spec1value: null,
     spec2key: null,
@@ -182,32 +182,26 @@ var vue = new Vue ({
   },
   methods: {
     postNewItem(){
+      if(typeof(this.priceidr) == 'number' ) {
         axios.post('http://vps.masfaris.com:3000/api/shop/additem', {
-        itemName: this.itemName,
-        image: this.image,
-        spec1key: this.spec1key,
-        spec1value: this.spec1value,
-        spec2key: this.spec2key,
-        spec2value: this.spec2value,
-        category: this.category,
-        priceidr: this.priceidr
-      })
-      .then(function (response) {
-        // let obj = {
-        //   itemName: req.body.name,
-        //   image: req.body.image,
-        //   specification: [
-        //     spec1,
-        //     spec2
-        //   ],
-        //   category: req.body.category,
-        //   priceidr: req.body.priceidr
-        // }
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+          itemName: this.itemName,
+          image: this.image,
+          spec1key: this.spec1key,
+          spec1value: this.spec1value,
+          spec2key: this.spec2key,
+          spec2value: this.spec2value,
+          category: this.category,
+          priceidr: this.priceidr
+        })
+        .then(function (response) {
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+      } else {
+        alert('price idr input must a number')
+      }
     },
     getitem(){
       axios.get('http://vps.masfaris.com:3000/api/shop/allTrans')
